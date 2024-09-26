@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Container, Radio, Header } from "semantic-ui-react";
 import { PostQuestion, PostArticle } from "../../constants.js";
+import { Header as Hheader } from "../../constants";
 
 const PostType = () => {
   const [isQuestion, setIsQuestion] = useState(false);
@@ -12,7 +13,7 @@ const PostType = () => {
 
   return (
     <Container
-      className="mt-[4rem] flex flex-col bg-[#f5f5dc]"
+      className="flex flex-col bg-[#f5f5dc]"
       style={{
         backgroundColor: "white",
         minHeight: "100vh",
@@ -20,6 +21,9 @@ const PostType = () => {
         minWidth: "100vw",
       }}
     >
+      <div className="w-full py-3 pb-10 mb-[5rem] text-white bg-gray-800 shadow-md">
+        <Hheader />
+      </div>
       <Form className="flex items-center justify-center gap-5">
         <Header as="h4" className="flex items-center justify-center mb-2">
           New Post:
