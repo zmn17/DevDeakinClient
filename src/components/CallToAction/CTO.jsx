@@ -26,7 +26,7 @@ const CTO = () => {
           Subscribe
         </button>
       </form>
-      <div id="responseMessage">{responseMsg}</div>
+      {/* <div id="responseMessage">{responseMsg}</div> */}
     </div>
   );
 };
