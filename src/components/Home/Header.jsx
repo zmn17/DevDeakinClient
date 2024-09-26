@@ -1,5 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutUser } from "../../utils/firebase";
+
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      console.log("User signed out successfully");
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
+
   return (
     <div className="flex items-center justify-between h-8 px-4 pt-8">
       <Link to="/" className="text-2xl font-bold text-primary font-poppins">
@@ -27,12 +41,15 @@ const Header = () => {
           Find Questions
         </Link>
 
-        <Link
-          to="/signup"
-          className="px-5 py-[.2rem] bg-blue-500 hover:border hover:border-[#45ae00] transition-colors duration-300 ease-in-out hover:bg-transparent cursor-pointer text-md text-white rounded-md font-poppins"
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleLogout();
+          }}
+          className="px-5 py-[.2rem] bg-blue-500 hover:border hover:border-red-500 transition-colors duration-300 ease-in-out hover:bg-transparent cursor-pointer text-md text-white rounded-md font-poppins"
         >
-          SignUp
-        </Link>
+          Logout
+        </button>
       </div>
     </div>
   );
