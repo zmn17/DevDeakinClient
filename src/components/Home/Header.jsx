@@ -16,7 +16,10 @@ const Header = () => {
 
   return (
     <div className="flex items-center justify-between h-8 px-4 pt-8">
-      <Link to="/" className="text-2xl font-bold text-primary font-poppins">
+      <Link
+        to="/homepage"
+        className="text-2xl font-bold text-primary font-poppins"
+      >
         &lt;/DEV@Deakin&gt;
       </Link>
       <div className="flex-grow: 1">
@@ -32,6 +35,13 @@ const Header = () => {
           className="text-xl cursor-pointer font-poppins text-primary"
         >
           &#123;Post&#125;
+        </Link>
+
+        <Link
+          to="/plans"
+          className="text-xl text-green-500 cursor-pointer font-poppins"
+        >
+          Plans
         </Link>
 
         <Link

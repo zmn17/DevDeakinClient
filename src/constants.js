@@ -13,6 +13,8 @@ import PostType from "./components/PostType/PostType";
 import FindQuestion from "./components/Questions/FindQuestion";
 import PostArticle from "./components/PostType/PostArticle";
 import PostQuestion from "./components/PostType/PostQuestion";
+import Plans from "./components/Plans/Plans";
+import Payment from "./components/PaymentPage/Payment";
 
 export {
   Home,
@@ -30,4 +32,6 @@ export {
   FindQuestion,
   PostArticle,
   PostQuestion,
+  Plans,
+  Payment,
 };

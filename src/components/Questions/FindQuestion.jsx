@@ -3,6 +3,7 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import QuestionCard from "./QuestionCard";
 import { Button, Form, Input } from "semantic-ui-react";
+import { Header } from "../../constants";
 
 const FindQuestion = () => {
   const [questions, setQuestions] = useState([]);
@@ -44,15 +45,6 @@ const FindQuestion = () => {
     setExpandedQuestionId((prevId) => (prevId === id ? null : id));
   };
 
-  // Handle drag end event to reorder questions
-  const handleDragEnd = (e, data, id) => {
-    const index = filteredQuestions.findIndex((q) => q.id === id);
-    const updatedQuestions = [...filteredQuestions];
-    const [movedItem] = updatedQuestions.splice(index, 1);
-    updatedQuestions.splice(data.y, 0, movedItem);
-    setFilteredQuestions(updatedQuestions);
-  };
-
   useEffect(() => {
     const fetchQuestions = async () => {
       const querySnapshot = await getDocs(collection(db, "Questions"));
@@ -67,17 +59,22 @@ const FindQuestion = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-[100%] mt-[13rem]">
-      <h1>Find Questions</h1>
+    <div className="flex flex-col items-center min-h-screen -center bg-gray-50">
+      <div className="w-full py-3 pb-10 text-white bg-gray-800 shadow-md">
+        <Header />
+      </div>
+
+      <h1 className="mb-6 text-3xl font-bold">Find Questions</h1>
 
       {/* Filter Form */}
-      <Form className="w-full max-w-md">
+      <Form className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
         <Form.Field>
           <Input
             placeholder="Filter by title"
             name="title"
             value={filter.title}
             onChange={handleFilterChange}
+            className="mb-4"
           />
         </Form.Field>
         <Form.Field>
@@ -86,23 +83,29 @@ const FindQuestion = () => {
             name="tag"
             value={filter.tag}
             onChange={handleFilterChange}
+            className="mb-4"
           />
         </Form.Field>
         <Form.Field>
           <Input
             type="date"
-            placeholder="Filter by date"
             name="date"
             value={filter.date}
             onChange={handleFilterChange}
+            className="mb-4"
           />
         </Form.Field>
-        <Button onClick={filterQuestions}>Apply Filters</Button>
+        <Button
+          onClick={filterQuestions}
+          className="w-full text-white bg-blue-500 hover:bg-blue-600 transition"
+        >
+          Apply Filters
+        </Button>
       </Form>
 
       <div className="w-full max-w-lg mt-8">
         {filteredQuestions.map((q) => (
-          <div key={q.id}>
+          <div key={q.id} className="mb-4">
             <QuestionCard
               q={q}
               expandedQuestionId={expandedQuestionId}

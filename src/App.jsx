@@ -7,6 +7,8 @@ import {
   DevDeakin,
   PostType,
   FindQuestion,
+  Plans,
+  Payment,
 } from "./constants";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/homepage" element={<DevDeakin />} />
         <Route path="/post" element={<PostType />} />
         <Route path="/find-questions" element={<FindQuestion />} />
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
