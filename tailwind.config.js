@@ -12,7 +12,7 @@ export default {
         silk: ["Silkscreen", "sans-serif"],
       },
       backgroundImage: {
-        "home-bg": "url('/assets/bg1.webp')",
+        "home-bg": "url('/src/assets/bg1.webp')",
       },
     },
   },
