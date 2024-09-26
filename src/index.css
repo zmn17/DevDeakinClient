@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gruppo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gruppo&family=Silkscreen:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.logo-text {
+  background: linear-gradient(to righ, #34d399, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title-grad {
+  background: linear-gradient(to right, #b1d400, #4a90e2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.segment {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Centers vertically within the viewport */
+  padding: 20px;
+}
+
+.form-segment {
+  width: 100%;
+  max-width: 600px; /* Limits the maximum width of the form */
+  margin: auto;
+}
+
+.posttype-form {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
