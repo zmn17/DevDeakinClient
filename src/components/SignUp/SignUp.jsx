@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signup, createUserDoc } from "../../utils/firebase";
+import {
+  signup,
+  createUserDoc,
+  resendVerificationEmail,
+} from "../../utils/firebase";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -32,11 +36,15 @@ const SignUp = () => {
 
     try {
       const { user } = await signup(email, password);
-      await createUserDoc(user, { displayName, lastname, address });
-
-      navigate("/login");
+      if (user) {
+        await createUserDoc(user, { displayName, lastname, address });
+        alert(
+          "A verification email has been sent to your email. Please verify your email before logging in.",
+        );
+        navigate("/login"); // Redirect to login page
+      }
     } catch (error) {
-      console.log("Error in registering user: ", error);
+      console.log("Error in registering user: ", error.message);
     }
   };
 

@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  sendEmailVerification,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -53,12 +54,45 @@ export const createUserDoc = async (userCred, additionalInformation) => {
 
 export const signup = async (email, password) => {
   if (!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password);
+
+  const userCredentials = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+
+  const user = userCredentials.user;
+  // send the verification email
+  await sendEmailVerification(user);
+  return userCredentials;
 };
 
 export const login = async (email, password) => {
   if (!email || !password) return;
-  return await signInWithEmailAndPassword(auth, email, password);
+
+  try {
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+    const user = userCredentials.user;
+
+    if (user && user.emailVerified) {
+      return userCredentials; // proceed with login
+    } else {
+      throw new Error("Please verify your email before logging in.");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resendVerificationEmail = async (user) => {
+  if (user && !user.emailVerified) {
+    await sendEmailVerification(user);
+    alert("Verification email resent. Please check your inbox.");
+  }
 };
 
 export const logoutUser = async () => {

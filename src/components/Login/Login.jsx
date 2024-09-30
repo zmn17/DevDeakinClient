@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../utils/firebase";
+import { login, resendVerificationEmail } from "../../utils/firebase"; // Include resendVerificationEmail
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -9,7 +9,7 @@ const Login = () => {
   });
 
   const [error, setError] = useState(null);
-
+  const [resendMessage, setResendMessage] = useState(null); // For showing resend verification message
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,15 +21,30 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const user = await login(loginData.email, loginData.password);
-      console.log(user);
-
-      if (user) {
+      const userCredentials = await login(loginData.email, loginData.password);
+      if (userCredentials) {
         navigate("/homepage");
       }
     } catch (error) {
-      setError("Invalid email or password. Please try again.");
+      if (error.message === "Please verify your email before logging in.") {
+        setResendMessage(
+          "Your email is not verified. Would you like to resend the verification email?",
+        );
+      } else {
+        setError("Invalid email or password. Please try again.");
+      }
       console.log("Error logging in user: ", error);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    try {
+      const user = await login(loginData.email, loginData.password);
+      await resendVerificationEmail(user.user);
+      setResendMessage("Verification email resent. Please check your inbox.");
+    } catch (error) {
+      setError("Unable to resend verification email. Please try again later.");
+      console.log("Error resending verification email: ", error);
     }
   };
 
@@ -66,6 +81,18 @@ const Login = () => {
           </div>
           {error && (
             <div className="mt-2 text-center text-red-500">{error}</div>
+          )}
+          {resendMessage && (
+            <div className="mt-2 text-center text-blue-500">
+              {resendMessage}
+              <button
+                type="button"
+                onClick={handleResendVerification}
+                className="ml-2 text-blue-600 underline"
+              >
+                Resend Verification Email
+              </button>
+            </div>
           )}
           <div>
             <button

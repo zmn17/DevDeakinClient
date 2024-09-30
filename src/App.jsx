@@ -9,6 +9,7 @@ import {
   FindQuestion,
   Plans,
   Payment,
+  Chat,
 } from "./constants";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/find-questions" element={<FindQuestion />} />
         <Route path="/plans" element={<Plans />} />
         <Route path="/payment" element={<Payment />} />
+        <Route path="/chat-gpt" element={<Chat />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

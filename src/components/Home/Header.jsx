@@ -51,6 +51,13 @@ const Header = () => {
           Find Questions
         </Link>
 
+        <Link
+          to="/chat-gpt"
+          className="text-xl text-yellow-500 cursor-pointer font-poppins"
+        >
+          Chat with AI
+        </Link>
+
         <button
           onClick={(e) => {
             e.preventDefault();

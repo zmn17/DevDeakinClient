@@ -3,13 +3,17 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../utils/firebase";
 import {
   Form,
-  TextArea,
   Button,
   Header,
   Segment,
   Container,
   Grid,
 } from "semantic-ui-react";
+import { Controlled as CodeMirror } from "react-codemirror2";
+import ReactMarkdown from "react-markdown";
+import "codemirror/lib/codemirror.css"; // Import CodeMirror styles
+import "codemirror/theme/material.css"; // Choose a theme
+import "codemirror/mode/markdown/markdown"; // Import Markdown mode
 
 const PostQuestion = () => {
   const [title, setTitle] = useState("");
@@ -53,12 +57,31 @@ const PostQuestion = () => {
                 />
               </Form.Field>
               <Form.Field>
-                <label>Describe your problem</label>
-                <TextArea
-                  placeholder="Tell us more about the problem..."
+                <label>Describe your problem (Markdown supported)</label>
+                <CodeMirror
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  options={{
+                    mode: "markdown",
+                    theme: "material",
+                    lineNumbers: true,
+                    viewportMargin: Infinity,
+                    lineWrapping: true,
+                    styleActiveLine: true,
+                  }}
+                  className="code-mirror-editor" // Add class for custom styling
+                  onBeforeChange={(editor, data, value) => {
+                    setDescription(value);
+                  }}
+                  onChange={(editor, data, value) => {
+                    setDescription(value);
+                  }}
                 />
+              </Form.Field>
+              <Form.Field>
+                <label>Preview</label>
+                <div className="markdown-preview">
+                  <ReactMarkdown>{description}</ReactMarkdown>
+                </div>
               </Form.Field>
               <Form.Field>
                 <label>Tags</label>
