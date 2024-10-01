@@ -88,6 +88,7 @@ export const login = async (email, password) => {
   }
 };
 
+// 2FA - using email verfication link
 export const resendVerificationEmail = async (user) => {
   if (user && !user.emailVerified) {
     await sendEmailVerification(user);

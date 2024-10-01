@@ -1,4 +1,11 @@
-import { Home, Articles, Tutorials, CTO, Footer } from "../../constants";
+import {
+  Home,
+  Articles,
+  Tutorials,
+  CTO,
+  Footer,
+  CodeCollab,
+} from "../../constants";
 
 const DevDeakin = () => {
   return (
@@ -6,6 +13,7 @@ const DevDeakin = () => {
       <Home />
       <Articles />
       <Tutorials />
+      <CodeCollab />
       <CTO />
       <Footer />
     </div>

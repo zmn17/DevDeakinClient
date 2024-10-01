@@ -16,6 +16,7 @@ import PostQuestion from "./components/PostType/PostQuestion";
 import Plans from "./components/Plans/Plans";
 import Payment from "./components/PaymentPage/Payment";
 import Chat from "./components/ChatGPT/Chat";
+import CodeCollab from "./components/CodeCollab/CodeCollab";
 
 export {
   Home,
@@ -36,4 +37,5 @@ export {
   Plans,
   Payment,
   Chat,
+  CodeCollab,
 };
